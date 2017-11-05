@@ -20,7 +20,9 @@
 - creates 10 test accounts to play with automatically. 
 - These accounts come preloaded with 100 (fake) ethers.
 
-> npm run testrpc
+        npm run testrpc
+
+- runs in background and prints any new transactions, even if turn app off.
 
 ## DApp
 
