@@ -6,11 +6,6 @@
 - interacted with it via nodejs console 
 - interacted with it through a webpage. 
 
-## TODO
-
-- deploy on public test network, for entire world to vote
-- use Truffle framework for development
-
 ## ethereumjs-testrpc
 
 - Node Ethereum client (testing + devlepment)
