@@ -26,6 +26,8 @@
 
 ### Via CLI
 
+- even if stop Node cli process will run in BG in memory
+
 > node
 > Web3 = require('web3')
 > web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
