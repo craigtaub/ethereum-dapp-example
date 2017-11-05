@@ -1,0 +1,16 @@
+{
+  "name": "voting-dapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "testrpc": "testrpc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethereumjs-testrpc": "^6.0.1",
+    "solc": "^0.4.18",
+    "web3": "^0.20.1"
+  }
+}
