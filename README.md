@@ -39,7 +39,7 @@
         solc = require('solc')
         compiledCode = solc.compile(code)
 - compile the contract
-- 
+
         compiledCode
         compiledCode.contracts[':Voting'].bytecode
 - compiled source code. code deployed to blockchain
