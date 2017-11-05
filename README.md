@@ -28,7 +28,7 @@
 
 ### Via CLI
 
-- even if stop Node cli process will run in BG in memory
+- even if stop Node cli process, testrpc server will run in BG in memory
 
         node
         Web3 = require('web3')
