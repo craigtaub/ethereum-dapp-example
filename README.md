@@ -14,6 +14,8 @@
 - works as web3.js provider
 - creates 10 test accounts to play with automatically. 
 - These accounts come preloaded with 100 (fake) ethers.
+- Gas Price default: 20000000000
+- Gas Limit default: 90000
 
         npm run testrpc
 
@@ -53,7 +55,7 @@
 - create contract object, used to depoy + initiate contracts in the blockchain
 
         byteCode = compiledCode.contracts[':Voting'].bytecode
-        deployedContract = VotingContract.new(['Rama','Nick','Jose'],{data: byteCode, from: web3.eth.accounts[0], gas: 4700000})
+        deployedContract = VotingContract.new(['Rama','Nick','Jose'],{data: byteCode, from: web3.eth.accounts[0], gas: 11})
 
 - ^ deploys contract to blockchain
 - intitialised with candidates for election (via contracutor)
@@ -61,7 +63,7 @@
 - from - blockchain keeps track of who deployed contract (to blockchain). Here its our first account (now the owner). In live blockchain u must own account (locked via passphrase during creation, unlocked before transaction)
 - gas - cost of interacting with blockcian, goes to miners who do work to include code in blockchain. specify how much willing to pay to get code in the blockchain, by setting value of gas. uses ether balance to buy. price set by network 
   
-        deployedContract.address
+         deployedContract.address
 
 - used to identify contract in that blockchain, via address
 
@@ -77,6 +79,27 @@
 
         contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
         contractInstance.totalVotesFor.call('Rama').toLocaleString()
+
+### Interact with Blockchain
+
+- load of RPC methods implemented in `ethereumjs-testrpc`.
+
+        web3.eth.gasPrice.c
+
+        web3.eth.blockNumber
+- each time create transaction creates new block. starts at 0
+
+        web3.eth.getBlock(1)
+- all details of a block
+
+        web3.eth.getBlockTransactionCount(3)
+- all blocks seem to have 1 transaction ??. perhaps change gas price/limit.
+
+        web3.eth.getTransaction("0x7673ee6ba39f7f1835cd3bff618678e79968f020e7ff7a85f0be8c92f73a1f7d")
+- get a transactions details
+
+        web3.eth.getBalance("0xceb9b1a3528bd83972859cf44f5240f9cd6d133e")
+- account balance
 
 ### Via web UI
 
