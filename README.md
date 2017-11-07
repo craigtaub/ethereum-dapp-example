@@ -111,13 +111,19 @@
 - 101 ETH, repeat, 102 ETH
 
         web3.eth.getTransaction("X")
-- gas: 110000. provided by sender (me) of sendTransaction
+- gas: 110000. provided by sender (me) in sendTransaction OR defaults to gasLimit
 
         web3.eth.getTransactionReceipt("X")
 - costs 2100 to send TX (gasUsed+cumulativeGasUsed)
 
         web3.fromWei(web3.eth.getTransaction("X").value)
 - Confirm it sent 1 ETH
+
+#### Many TX on 1 block
+
+        --blocktime=10
+- sets when it will mine TX's. Turns auto-mining on which creates new block (even if no TX). 
+- and limit obv.
 
 ### Smart Contract
 
