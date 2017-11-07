@@ -26,7 +26,7 @@
 
 ## DApp
 
-### Via CLI
+### Create Smart Contract
 
 - even if stop Node cli process, testrpc server will run in BG in memory
 
@@ -83,32 +83,11 @@
         contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
         contractInstance.totalVotesFor.call('Rama').toLocaleString()
 
-### Interact with Blockchain
-
-- load of RPC methods implemented in `ethereumjs-testrpc`.
-
-        web3.eth.gasPrice.c
-
-        web3.eth.blockNumber
-- each time create transaction creates new block. starts at 0
-
-        web3.eth.getBlock(1)
-- all details of a block
-
-        web3.eth.getBlockTransactionCount(3)
-- all blocks seem to have 1 transaction ??. perhaps change gas price/limit.
-
-        web3.eth.getTransaction("0x7673ee6ba39f7f1835cd3bff618678e79968f020e7ff7a85f0be8c92f73a1f7d")
-- get a transactions details
-
-        web3.eth.getBalance("0xceb9b1a3528bd83972859cf44f5240f9cd6d133e")
-- account balance
 
 ### Basic transaction
 
         gasPrice=1000000000000000000
         gasLimit=900000
-
 - start: 
 
         web3.fromWei(web3.eth.gasPrice)
@@ -121,9 +100,8 @@
         web3.eth.sendTransaction({
                 from: web3.eth.accounts[0],
                 to: web3.eth.accounts[1],
-                value: web3.toWei(1), // expects in wei,
+                value: web3.toWei(1), // expects in wei
         });
-
 - send 1 ETH
 
         web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0]))
@@ -141,6 +119,61 @@
         web3.fromWei(web3.eth.getTransaction("X").value)
 - Confirm it sent 1 ETH
 
+### Smart Contract
+
+        gasPrice=1000000000000000000 
+        gasLimit=900000
+- start
+
+        VotingContract.new, gas: 500000 * 1000000000000000000
+
+- costs 500000 for each transaction. contract gas price. used for calc of tx price.
+
+        web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0]))
+- 100 ETH, cost couple Wei to launch contract 
+
+        contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
+- voted 
+
+        web3.eth.getBalance(web3.eth.accounts[0])
+- cost 43000 wei. 
+
+        web3.eth.getTransaction("0x07e5ccd1bfb6c4b77a822c9239455f4154384901308215bc8fb25d74e6524c46")
+- value: { [String: '0'] s: 1, e: 0, c: [ 0 ] }, -> always same
+- gas: 90000, -> limit, always the same
+- gasPrice: { [String: '1'] s: 1, e: 0, c: [ 1 ] }, -> always same
+  
+        contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
+- voted again
+
+        web3.eth.getTransactionReceipt("0x07e5ccd1bfb6c4b77a822c9239455f4154384901308215bc8fb25d74e6524c46")
+- gasUsed+cumulativeGasUsed: 43402, -> confirms cost
+
+        web3.eth.getTransaction("0x4776f1b595508be856b43cfaf41e3efe2f3a599d50cc827b64f0abf3368afce4")
+        web3.eth.getTransactionReceipt("0x4776f1b595508be856b43cfaf41e3efe2f3a599d50cc827b64f0abf3368afce4")
+- gasUsed+cumulativeGasUsed: 28402,
+
 ### Via web UI
 
 - need ABI and address to interact with contract
+
+### Interact with Blockchain
+
+- load of RPC methods implemented in `ethereumjs-testrpc`. From JS API.
+
+        web3.eth.gasPrice.c
+
+        web3.eth.blockNumber
+- each time create transaction creates new block. starts at 0
+
+        web3.eth.getBlock(1)
+- all details of a block
+
+        web3.eth.getBlockTransactionCount(3)
+- all blocks seem to have 1 transaction ??. perhaps change gas price/limit.
+
+        web3.eth.getTransaction("X")
+- get a transactions details
+
+        web3.eth.getBalance("X")
+- account balance

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "testrpc": "testrpc --gasPrice=1000000000000000000 --gasLimit=900000"
+    "testrpc": "testrpc --gasPrice=1000000000000000000 --gasLimit=11000000"
   },
   "author": "",
   "license": "ISC",
