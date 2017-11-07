@@ -162,24 +162,3 @@
 ### Via web UI
 
 - need ABI and address to interact with contract
-
-### Interact with Blockchain
-
-- load of RPC methods implemented in `ethereumjs-testrpc`. From JS API.
-
-        web3.eth.gasPrice.c
-
-        web3.eth.blockNumber
-- each time create transaction creates new block. starts at 0
-
-        web3.eth.getBlock(1)
-- all details of a block
-
-        web3.eth.getBlockTransactionCount(3)
-- all blocks seem to have 1 transaction ??. perhaps change gas price/limit.
-
-        web3.eth.getTransaction("X")
-- get a transactions details
-
-        web3.eth.getBalance("X")
-- account balance
