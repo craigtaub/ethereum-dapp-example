@@ -1,0 +1,79 @@
+
+=====  1. "Error: base fee exceeds gas limit" 
+- base fee is gas (47). limit is 90.
+
+--gasPrice=20000000000 
+gas: 4700000
+works
+
+--gasPrice=20000000000 --gasLimit=9000000
+gas: 4700000
+WORKS
+
+--gasPrice=2000000000 --gasLimit=900000
+gas: 470000
+WORKS (took off 1 0, fails if take off 2)
+
+--gasPrice=200000 --gasLimit=90
+gas: 47
+FAILS (took off 4 0's, why)?
+
+??
+===
+
+== 2. 1 block per tx ?
+
+> contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
+- 3 tx's.
+
+> web3.eth.getBlock(3).transactions
+- array of 1. why
+
+> web3.eth.getTransaction("0xe9d5b02054653a9599566f46db08bed6f0f4b56518206e39e960685b1c03f264")
+  value: { [String: '0'] s: 1, e: 0, c: [ 0 ] },
+  gas: 90000, -> ? /10 limit, always same
+  gasPrice: { [String: '1'] s: 1, e: 0, c: [ 1 ] },
+  - SO each tx using full gas limit
+  - tx has 9k
+
+> web3.eth.getBlock(3)
+  size: 1000, -> always same
+  gasLimit: 900000, -> Gas limit amount, always same
+  gasUsed: 43402, <- why? 
+  - block has 900k (from config)
+===
+
+== 3. gasUsed, vote cost 
+Nick
+Gas usage: 29199 - always
+
+Rama
+Gas usage: 28402 - always ???
+
+contractInstance.voteForCandidate('Nick', {from: web3.eth.accounts[0], gas: 100007})
+web3.eth.getTransaction("0xc93b9bd978a969f1c6b2f356591909ddde83b55ca329d402d08c400a4da15b5e")
+- shows gas: 100007
+web3.eth.getBlock(34) - no change
+  size: 1000,
+  gasLimit: 900000,
+  gasUsed: 29199,
+
+- send normal tx, not vote.
+web3.eth.sendTransaction({
+  from: web3.eth.accounts[0],
+  to: web3.eth.accounts[1],
+  value: 500, // wei
+  gas: 90000
+})
+TX:
+  value: { [String: '500'] s: 1, e: 2, c: [ 500 ] },
+  gas: 90000,
+  gasPrice: { [String: '1'] s: 1, e: 0, c: [ 1 ] },
+Block:
+  size: 1000,
+  gasLimit: 900000,
+  gasUsed: 21000, <- now always that.
+
+web3.eth.getTransactionReceipt("0x6e4dcf99255542a221549c82d1c426621116ed1d75ca38bdbd261fba1eee15a8")
+- all about gasUsed + cumulativeGasUsed
+==

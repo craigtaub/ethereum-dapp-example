@@ -14,8 +14,9 @@
 - works as web3.js provider
 - creates 10 test accounts to play with automatically. 
 - These accounts come preloaded with 100 (fake) ethers.
-- Gas Price default: 20000000000
-- Gas Limit default: 90000
+- Gas Price default: 2000000000
+- Gas Limit default: 9000 (limit < price)
+- Tx price default: 4700000
 
         npm run testrpc
 
