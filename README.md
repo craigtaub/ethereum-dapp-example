@@ -6,6 +6,8 @@
 - interacted with it via nodejs console 
 - interacted with it through a webpage. 
 
+- JS API: https://github.com/ethereum/wiki/wiki/JavaScript-API
+
 ## ethereumjs-testrpc
 
 - Node Ethereum client (testing + devlepment)
@@ -101,6 +103,43 @@
 
         web3.eth.getBalance("0xceb9b1a3528bd83972859cf44f5240f9cd6d133e")
 - account balance
+
+### Basic transaction
+
+        gasPrice=1000000000000000000
+        gasLimit=900000
+
+- start: 
+
+        web3.fromWei(web3.eth.gasPrice)
+- 1 ETH.
+
+        web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0]))
+        web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1]))
+- 100 ETH each.
+
+        web3.eth.sendTransaction({
+                from: web3.eth.accounts[0],
+                to: web3.eth.accounts[1],
+                value: web3.toWei(1), // expects in wei,
+        });
+
+- send 1 ETH
+
+        web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0]))
+- 99 ETH, repeat, 98 ETH
+
+        web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1]))
+- 101 ETH, repeat, 102 ETH
+
+        web3.eth.getTransaction("X")
+- gas: 110000. provided by sender (me) of sendTransaction
+
+        web3.eth.getTransactionReceipt("X")
+- costs 2100 to send TX (gasUsed+cumulativeGasUsed)
+
+        web3.fromWei(web3.eth.getTransaction("X").value)
+- Confirm it sent 1 ETH
 
 ### Via web UI
 
